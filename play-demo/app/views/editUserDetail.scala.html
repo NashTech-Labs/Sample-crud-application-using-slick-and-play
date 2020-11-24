@@ -1,0 +1,33 @@
+@(form: Form[UserDetail], postUrl: Call)(implicit request: MessagesRequestHeader)
+
+@main("User Detail") {
+
+<h1>User Detail</h1>
+
+@* Flash shows updates to a page *@
+@request.flash.data.map{ case (name, value) =>
+<div>@name: @value</div>
+}
+
+@* Global errors are not tied to any particular form field *@
+@if(form.hasGlobalErrors) {
+@form.globalErrors.map { error: FormError =>
+<div>
+    Error: @error.key: @error.message
+</div>
+}
+}
+
+@* “'id” in these elements is the css `id` field that will be shown *@
+@helper.form(postUrl, 'id -> "user_edit_form") {
+@helper.CSRF.formField
+
+@helper.inputText(form("name"))
+@helper.inputText(form("id"))
+@helper.inputText(form("age"))
+
+
+<button>Save</button>
+}
+}
+

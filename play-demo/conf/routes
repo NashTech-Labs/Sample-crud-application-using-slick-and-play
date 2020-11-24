@@ -1,0 +1,12 @@
+# Routes
+
+GET    /                       controllers.Application.getData
+
+GET  /users/add   controllers.Application.add
+POST /users/save  controllers.Application.save
+
+GET   /message   controllers.Application.printMessage
+
++nocsrf
+POST   /user/:id/delete   controllers.Application.deleteData(id:Int)
+
